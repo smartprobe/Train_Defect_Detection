@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This is the code for the paper *文章标题*. We have implemented our methods in **PyTorch**.
+This is the code for the paper: *文章标题*. We have implemented our methods in **PyTorch**.
 
 ## Preparation
 
