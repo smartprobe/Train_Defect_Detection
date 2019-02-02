@@ -27,13 +27,13 @@ cd lib
 sh make.sh
 ```
 
-### prerequisites
+## Prerequisites
 
 * Python 2.7
 * Pytorch 0.4.0
 * CUDA 8.0 or higher
 
-### Data Preparation
+## Data Preparation
 
 ~~* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.~~
 
@@ -41,7 +41,7 @@ sh make.sh
 
 ~~* **Visual Genome**: Please follow the instructions in [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) to prepare Visual Genome dataset. You need to download the images and object annotation files first, and then perform proprecessing to obtain the vocabulary and cleansed annotations based on the scripts provided in this repository.~~
 
-### Pretrained Model
+## Pretrained Model
 
 We used two pretrained models in our experiments, VGG and ResNet101. You can download these two models from:
 
@@ -50,10 +50,6 @@ We used two pretrained models in our experiments, VGG and ResNet101. You can dow
 * ResNet101: [Dropbox](https://www.dropbox.com/s/iev3tkbz5wyyuz9/resnet101_caffe.pth?dl=0), [VT Server](https://filebox.ece.vt.edu/~jw2yang/faster-rcnn/pretrained-base-models/resnet101_caffe.pth)
 
 Download them and put them into the data/pretrained_model/.
-
-**NOTE**. We compare the pretrained models from Pytorch and Caffe, and surprisingly find Caffe pretrained models have slightly better performance than Pytorch pretrained. We would suggest to use Caffe pretrained models from the above link to reproduce our results.
-
-**If you want to use pytorch pre-trained models, please remember to transpose images from BGR to RGB, and also use the same data transformer (minus mean and normalize) as used in pretrained model.**
 
 ## Train
 
