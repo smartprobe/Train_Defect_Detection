@@ -2,13 +2,13 @@
 
 ## Introduction
 
-This project is a pytorch implementation of the paper *文章标题*, aimed to accelerating the training of faster R-CNN object detection models and improving the performance of small-object detection. There is a original implementation basis of faster R-CNN:
+This project is a pytorch implementation of the paper *文章标题*, aimed to improving the performance of object detection at different scales based on faster R-CNN models. During our implementing, we mainly referred to the following implementation:
 
 * [jwyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
 
-During our implementing, we referred the above implementations, especailly [longcw/faster_rcnn_pytorch](https://github.com/longcw/faster_rcnn_pytorch). However, our implementation has several unique and new features compared with the above implementations:
+However, our implementation has several unique and new features compared with the original ones:
 
-* **It is pure Pytorch code**. We convert all the numpy implementations to pytorch!
+* **列举特征**. 详细说明：We convert all the numpy implementations to pytorch!
 
 * **It supports multi-image batch training**. We revise all the layers, including dataloader, rpn, roi-pooling, etc., to support multiple images in each minibatch.
 
@@ -91,17 +91,17 @@ Thanks to [Remi](https://github.com/Cadene) for providing the pretrained detecti
 
 First of all, clone the code
 ```
-git clone https://github.com/jwyang/faster-rcnn.pytorch.git
+git clone https://github.com/smartprobe/Train_Defect_Detection.git
 ```
 
 Then, create a folder:
 ```
-cd faster-rcnn.pytorch && mkdir data
+cd Train_Defect_Detection && mkdir data
 ```
 
 ### prerequisites
 
-* Python 2.7 or 3.6
+* Python 2.7 (**now it does not support 3.6**)
 * Pytorch 0.4.0 (**now it does not support 0.4.1 or higher**)
 * CUDA 8.0 or higher
 
@@ -109,9 +109,9 @@ cd faster-rcnn.pytorch && mkdir data
 
 * **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.
 
-* **COCO**: Please also follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare the data.
+~~* **COCO**: Please also follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare the data.~~
 
-* **Visual Genome**: Please follow the instructions in [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) to prepare Visual Genome dataset. You need to download the images and object annotation files first, and then perform proprecessing to obtain the vocabulary and cleansed annotations based on the scripts provided in this repository.
+~~* **Visual Genome**: Please follow the instructions in [bottom-up-attention](https://github.com/peteanderson80/bottom-up-attention) to prepare Visual Genome dataset. You need to download the images and object annotation files first, and then perform proprecessing to obtain the vocabulary and cleansed annotations based on the scripts provided in this repository.~~
 
 ### Pretrained Model
 
