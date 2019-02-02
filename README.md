@@ -22,69 +22,16 @@ However, our implementation has several unique and new features compared with th
 
 ### What we are doing and going to do
 
-- [x] Support both python2 and python3 (great thanks to [cclauss](https://github.com/cclauss)).
-- [x] Add deformable pooling layer (mainly supported by [Xander](https://github.com/xanderchf)).
-- [x] Support pytorch-0.4.0.
-- [x] Support tensorboardX.
+- [ ] Support both python2 and python3.
 - [ ] Support pytorch-0.4.1 or higher.
 
 ## Other Implementations
 
 * [Feature Pyramid Network (FPN)](https://github.com/jwyang/fpn.pytorch)
 
-* [Mask R-CNN](https://github.com/roytseng-tw/mask-rcnn.pytorch) (~~ongoing~~ already implemented by [roytseng-tw](https://github.com/roytseng-tw))
+~~* [Mask R-CNN](https://github.com/roytseng-tw/mask-rcnn.pytorch) (~~ongoing~~ already implemented by [roytseng-tw](https://github.com/roytseng-tw))~~
 
-* [Graph R-CNN](https://github.com/jwyang/graph-rcnn.pytorch) (extension to scene graph generation)
-
-## Tutorial
-
-* [Blog](http://www.telesens.co/2018/03/11/object-detection-and-classification-using-r-cnns/) by [ankur6ue](https://github.com/ankur6ue)
-
-## Benchmarking
-
-We benchmark our code thoroughly on three datasets: pascal voc, coco and imagenet-200, using two different network architecture: vgg16 and resnet101. Below are the results:
-
-1). PASCAL VOC 2007 (Train/Test: 07trainval/07test, scale=600, ROI Align)
-
-model    | #GPUs | batch size | lr        | lr_decay | max_epoch     |  time/epoch | mem/GPU | mAP
----------|--------|-----|--------|-----|-----|-------|--------|-----
-[VGG-16](https://www.dropbox.com/s/6ief4w7qzka6083/faster_rcnn_1_6_10021.pth?dl=0)     | 1 | 1 | 1e-3 | 5   | 6   |  0.76 hr | 3265MB   | 70.1
-[VGG-16](https://www.dropbox.com/s/cpj2nu35am0f9hp/faster_rcnn_1_9_2504.pth?dl=0)     | 1 | 4 | 4e-3 | 8   | 9  |  0.50 hr | 9083MB   | 69.6
-[VGG-16](https://www.dropbox.com/s/1a31y7vicby0kvy/faster_rcnn_1_10_625.pth?dl=0)     | 8 | 16| 1e-2 | 8   | 10  |  0.19 hr | 5291MB   | 69.4
-[VGG-16](https://www.dropbox.com/s/hkj7i6mbhw9tq4k/faster_rcnn_1_11_416.pth?dl=0)     | 8 | 24| 1e-2 | 10  | 11  |  0.16 hr | 11303MB  | 69.2
-[Res-101](https://www.dropbox.com/s/4v3or0054kzl19q/faster_rcnn_1_7_10021.pth?dl=0)   | 1 | 1 | 1e-3 | 5   | 7   |  0.88 hr | 3200 MB  | 75.2
-[Res-101](https://www.dropbox.com/s/8bhldrds3mf0yuj/faster_rcnn_1_10_2504.pth?dl=0)    | 1 | 4 | 4e-3 | 8   | 10  |  0.60 hr | 9700 MB  | 74.9
-[Res-101](https://www.dropbox.com/s/5is50y01m1l9hbu/faster_rcnn_1_10_625.pth?dl=0)    | 8 | 16| 1e-2 | 8   | 10  |  0.23 hr | 8400 MB  | 75.2 
-[Res-101](https://www.dropbox.com/s/cn8gneumg4gjo9i/faster_rcnn_1_12_416.pth?dl=0)    | 8 | 24| 1e-2 | 10  | 12  |  0.17 hr | 10327MB  | 75.1  
-
-
-2). COCO (Train/Test: coco_train+coco_val-minival/minival, scale=800, max_size=1200, ROI Align)
-
-model     | #GPUs | batch size |lr        | lr_decay | max_epoch     |  time/epoch | mem/GPU | mAP
----------|--------|-----|--------|-----|-----|-------|--------|-----
-VGG-16     | 8 | 16    |1e-2| 4   | 6  |  4.9 hr | 7192 MB  | 29.2
-[Res-101](https://www.dropbox.com/s/5if6l7mqsi4rfk9/faster_rcnn_1_6_14657.pth?dl=0)    | 8 | 16    |1e-2| 4   | 6  |  6.0 hr    |10956 MB  | 36.2
-[Res-101](https://www.dropbox.com/s/be0isevd22eikqb/faster_rcnn_1_10_14657.pth?dl=0)    | 8 | 16    |1e-2| 4   | 10  |  6.0 hr    |10956 MB  | 37.0
-
-**NOTE**. Since the above models use scale=800, you need add "--ls" at the end of test command.
-
-3). COCO (Train/Test: coco_train+coco_val-minival/minival, scale=600, max_size=1000, ROI Align)
-
-model     | #GPUs | batch size |lr        | lr_decay | max_epoch     |  time/epoch | mem/GPU | mAP
----------|--------|-----|--------|-----|-----|-------|--------|-----
-[Res-101](https://www.dropbox.com/s/y171ze1sdw1o2ph/faster_rcnn_1_6_9771.pth?dl=0)    | 8 | 24    |1e-2| 4   | 6  |  5.4 hr    |10659 MB  | 33.9
-[Res-101](https://www.dropbox.com/s/dpq6qv0efspelr3/faster_rcnn_1_10_9771.pth?dl=0)    | 8 | 24    |1e-2| 4   | 10  |  5.4 hr    |10659 MB  | 34.5
-
-4). Visual Genome (Train/Test: vg_train/vg_test, scale=600, max_size=1000, ROI Align, category=2500)
-
-model     | #GPUs | batch size |lr        | lr_decay | max_epoch     |  time/epoch | mem/GPU | mAP
----------|--------|-----|--------|-----|-----|-------|--------|-----
-[VGG-16](http://data.lip6.fr/cadene/faster-rcnn.pytorch/faster_rcnn_1_19_48611.pth)    | 1 P100 | 4    |1e-3| 5   | 20  |  3.7 hr    |12707 MB  | 4.4
-
-Thanks to [Remi](https://github.com/Cadene) for providing the pretrained detection model on visual genome!
-
-* Click the links in the above tables to download our pre-trained faster r-cnn models.
-* If not mentioned, the GPU we used is NVIDIA Titan X Pascal (12GB).
+~~* [Graph R-CNN](https://github.com/jwyang/graph-rcnn.pytorch) (extension to scene graph generation)~~
 
 ## Preparation
 
@@ -99,6 +46,17 @@ Then, create a folder:
 cd Train_Defect_Detection && mkdir data
 ```
 
+Install all the python dependencies using pip:
+```
+pip install -r requirements.txt
+```
+
+Compile the cuda dependencies using following simple commands:
+```
+cd lib
+sh make.sh
+```
+
 ### prerequisites
 
 * Python 2.7 (**now it does not support 3.6**)
@@ -107,7 +65,7 @@ cd Train_Defect_Detection && mkdir data
 
 ### Data Preparation
 
-* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.
+~~* **PASCAL_VOC 07+12**: Please follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare VOC datasets. Actually, you can refer to any others. After downloading the data, creat softlinks in the folder data/.~~
 
 ~~* **COCO**: Please also follow the instructions in [py-faster-rcnn](https://github.com/rbgirshick/py-faster-rcnn#beyond-the-demo-installation-for-training-and-testing-models) to prepare the data.~~
 
@@ -128,18 +86,6 @@ Download them and put them into the data/pretrained_model/.
 **If you want to use pytorch pre-trained models, please remember to transpose images from BGR to RGB, and also use the same data transformer (minus mean and normalize) as used in pretrained model.**
 
 ### Compilation
-
-As pointed out by [ruotianluo/pytorch-faster-rcnn](https://github.com/ruotianluo/pytorch-faster-rcnn), choose the right `-arch` in `make.sh` file, to compile the cuda code:
-
-  | GPU model  | Architecture |
-  | ------------- | ------------- |
-  | TitanX (Maxwell/Pascal) | sm_52 |
-  | GTX 960M | sm_50 |
-  | GTX 1080 (Ti) | sm_61 |
-  | Grid K520 (AWS g2.2xlarge) | sm_30 |
-  | Tesla K80 (AWS p2.xlarge) | sm_37 |
-
-More details about setting the architecture can be found [here](https://developer.nvidia.com/cuda-gpus) or [here](http://arnon.dk/matching-sm-architectures-arch-and-gencode-for-various-nvidia-cards/)
 
 Install all the python dependencies using pip:
 ```
