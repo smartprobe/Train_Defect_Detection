@@ -104,7 +104,9 @@ cd ./stage2/
 ~~* Faster RCNN:~~
 
 * Our Framework
+
 Stage1:
+
 ![Object Detection Sample](samples/stage1/179.jpg)
 
 ![Object Detection Sample](samples/stage1/U0925_0537-H45082_16_4_5.jpg)
@@ -114,6 +116,7 @@ Stage1:
 ![Object Detection Sample](samples/stage1/U0925_0540-H17020_12_1_7.jpg)
 
 Stage2:
+
 ![Object Detection Sample](samples/stage2/1_det.jpg)
 
 ![Object Detection Sample](samples/stage2/2_det.jpg)
