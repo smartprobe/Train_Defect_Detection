@@ -67,7 +67,7 @@ If you want to evlauate the detection performance , simply run
 ```
 python test_net.py --dataset pascal_voc --net res101 \
                    --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
-                   --cuda
+                   --cuda --vis
 ```
 Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, EPOCH=20, CHECKPOINT=1000.
 
@@ -79,12 +79,24 @@ We have trained the two model for testing our dataset.
 
 
 
-## Implemention
+## Implementation
 
-* Stage1: (Input, Output)
+* Stage1: (Input, Output)\
+```
+cd ./stage1/
+1.run test_net.py as mentioned above
+2.generate bounding boxes in Images and saved in ./results
+3.generate patches in ./crop_images
+```
 
 
 * Stage2: (Input, Output)
+```
+cd ./stage2/
+1.The input is the patches generated in stage1.
+2.run demo.py as mentioned above
+3.generate bounding boxes in Images and saved in ./demo
+```
 
 
 
@@ -100,6 +112,6 @@ Stage1:
 
 
 
-* Stage2:
+Stage2:
 ![Object Detection Sample](samples/stage2/179_1_det.jpg)
 
