@@ -91,12 +91,15 @@ We have trained the two model for testing our dataset.
 ## Sample of our method
 
 * Faster RCNN:
+![Object Detection Sample](samples/frcnn/179_det.jpg)
 
 
 * Our Framework
 Stage1:
+![Object Detection Sample](samples/stage1/179_det.jpg)
 
 
 
 Stage2:
+![Object Detection Sample](samples/stage2/179_det.jpg)
 
