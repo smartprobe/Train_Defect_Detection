@@ -73,9 +73,9 @@ Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, 
 
 We have trained the two model for testing our dataset.
 
-* Stage1：  [Google Drive](https://drive.google.com/open?id=151499FF5oN8jHKclp693tHIonic5JuV7)
+* Stage1:  [Google Drive](https://drive.google.com/open?id=151499FF5oN8jHKclp693tHIonic5JuV7)
 
-* Stage2:   [Google Drive](https://drive.google.com/open?id=1b2VuFeIjO8klsvdHJ_DUJzq-Hcimkrls)
+* Stage2:  [Google Drive](https://drive.google.com/open?id=1b2VuFeIjO8klsvdHJ_DUJzq-Hcimkrls)
 
 
 
