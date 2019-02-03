@@ -101,5 +101,5 @@ Stage1:
 
 
 Stage2:
-![Object Detection Sample](samples/stage2/179_det.jpg)
+![Object Detection Sample](samples/stage2/179_1_det.jpg)
 
