@@ -117,18 +117,10 @@ Stage1:
 
 Stage2:
 
-![Object Detection Sample](samples/stage2/1_det.jpg)
+![Object Detection Sample](samples/stage2/1_det.jpg)  ![Object Detection Sample](samples/stage2/2_det.jpg)  ![Object Detection Sample](samples/stage2/3_det.jpg)
 
-![Object Detection Sample](samples/stage2/2_det.jpg)
+![Object Detection Sample](samples/stage2/4_det.jpg) 
 
-![Object Detection Sample](samples/stage2/3_det.jpg)
+![Object Detection Sample](samples/stage2/5_det.jpg)  ![Object Detection Sample](samples/stage2/6_det.jpg) 
 
-![Object Detection Sample](samples/stage2/4_det.jpg)
-
-![Object Detection Sample](samples/stage2/5_det.jpg)
-
-![Object Detection Sample](samples/stage2/6_det.jpg)
-
-![Object Detection Sample](samples/stage2/7_det.jpg)
-
-![Object Detection Sample](samples/stage2/8_det.jpg)
+![Object Detection Sample](samples/stage2/7_det.jpg)  ![Object Detection Sample](samples/stage2/8_det.jpg)
