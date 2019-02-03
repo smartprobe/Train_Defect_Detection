@@ -4,9 +4,6 @@
 
 This is the code for the paper: A Deep Learning based Framework for Component Defect Detection of Moving Trains. We have implemented our methods in **PyTorch**.
 
-![Object Detection Sample](samples/frcnn/179_det.jpg)
-
-
 ## Preparation
 
 First of all, clone the code
@@ -104,16 +101,31 @@ cd ./stage2/
 
 ## Sample of our method
 
-* Faster RCNN:
-![Object Detection Sample](samples/frcnn/179_det.jpg)
-
+~~* Faster RCNN:~~
 
 * Our Framework
 Stage1:
-![Object Detection Sample](samples/stage1/179_det.jpg)
+![Object Detection Sample](samples/stage1/179.jpg)
 
+![Object Detection Sample](samples/stage1/U0925_0537-H45082_16_4_5.jpg)
 
+![Object Detection Sample](samples/stage1/U0925_0537-H45082_27_1_2.jpg)
+
+![Object Detection Sample](samples/stage1/U0925_0540-H17020_12_1_7.jpg)
 
 Stage2:
-![Object Detection Sample](samples/stage2/179_1_det.jpg)
+![Object Detection Sample](samples/stage2/1_det.jpg)
 
+![Object Detection Sample](samples/stage2/2_det.jpg)
+
+![Object Detection Sample](samples/stage2/3_det.jpg)
+
+![Object Detection Sample](samples/stage2/4_det.jpg)
+
+![Object Detection Sample](samples/stage2/5_det.jpg)
+
+![Object Detection Sample](samples/stage2/6_det.jpg)
+
+![Object Detection Sample](samples/stage2/7_det.jpg)
+
+![Object Detection Sample](samples/stage2/8_det.jpg)
