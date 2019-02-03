@@ -91,8 +91,8 @@ cd ./stage1/
 ```
 
 
-* Stage2: (Input, Output)
-Input is the cropped patches from stage1, Output is the bounding box
+* Stage2: 
+(Input is the cropped patches from stage1, Output is the bounding box)
 ```
 cd ./stage2/
 1.The input is the patches generated in stage1.
