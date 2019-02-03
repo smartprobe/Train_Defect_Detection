@@ -105,22 +105,18 @@ cd ./stage2/
 
 * Our Framework
 
-Stage1:
-
 ![Object Detection Sample](samples/stage1/179.jpg)
+
+![Object Detection Sample](samples/stage2/1_det.jpg)  ![Object Detection Sample](samples/stage2/2_det.jpg)
 
 ![Object Detection Sample](samples/stage1/U0925_0537-H45082_16_4_5.jpg)
 
+![Object Detection Sample](samples/stage2/4_det.jpg)  ![Object Detection Sample](samples/stage2/3_det.jpg)
+
 ![Object Detection Sample](samples/stage1/U0925_0537-H45082_27_1_2.jpg)
 
-![Object Detection Sample](samples/stage1/U0925_0540-H17020_12_1_7.jpg)
-
-Stage2:
-
-![Object Detection Sample](samples/stage2/1_det.jpg)  ![Object Detection Sample](samples/stage2/2_det.jpg)  ![Object Detection Sample](samples/stage2/3_det.jpg)
-
-![Object Detection Sample](samples/stage2/4_det.jpg) 
-
 ![Object Detection Sample](samples/stage2/5_det.jpg)  ![Object Detection Sample](samples/stage2/6_det.jpg) 
+
+![Object Detection Sample](samples/stage1/U0925_0540-H17020_12_1_7.jpg)
 
 ![Object Detection Sample](samples/stage2/7_det.jpg)  ![Object Detection Sample](samples/stage2/8_det.jpg)
