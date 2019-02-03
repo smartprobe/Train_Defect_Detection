@@ -13,7 +13,7 @@ git clone https://github.com/smartprobe/Train_Defect_Detection.git
 
 Then, create a folder:
 ```
-cd Train_Defect_Detection/stage1 && mkdir data
+cd Train_Defect_Detection/branch1 && mkdir data
 ```
 
 Install all the python dependencies using pip:
@@ -70,29 +70,29 @@ Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, 
 
 We have trained the two model for testing our dataset.
 
-* Stage1:  [Google Drive](https://drive.google.com/open?id=151499FF5oN8jHKclp693tHIonic5JuV7)
+* Branch 1:  [Google Drive](https://drive.google.com/open?id=151499FF5oN8jHKclp693tHIonic5JuV7)
 
-* Stage2:  [Google Drive](https://drive.google.com/open?id=1b2VuFeIjO8klsvdHJ_DUJzq-Hcimkrls)
+* Branch 2:  [Google Drive](https://drive.google.com/open?id=1b2VuFeIjO8klsvdHJ_DUJzq-Hcimkrls)
 
 
 
 ## Implementation
 
-* Stage1: 
+* Branch 1: 
 (Input is the original images, Output is the bounding box and the cropped patches)
 ```
-cd ./stage1/
+cd ./branch1/
 1.run test_net.py as mentioned above
 2.generate bounding boxes in Images and saved in ./results
 3.generate patches in ./crop_images
 ```
 
 
-* Stage2: 
-(Input is the cropped patches from stage1, Output is the bounding box)
+*  Branch 2: 
+(Input is the cropped patches from Branch 1, Output is the bounding box)
 ```
-cd ./stage2/
-1.The input is the patches generated in stage1.
+cd ./branch2/
+1.The input is the patches generated in Branch 1.
 2.run demo.py as mentioned above
 3.generate bounding boxes in Images and saved in ./demo
 ```
