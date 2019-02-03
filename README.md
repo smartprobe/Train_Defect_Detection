@@ -81,19 +81,19 @@ We have trained the two model for testing our dataset.
 
 ## Implemention
 
-Stage1: (Input, Output)
+* Stage1: (Input, Output)
 
 
-Stage2: (Input, Output)
+* Stage2: (Input, Output)
 
 
 
 ## Sample of our method
 
-Faster RCNN:
+* Faster RCNN:
 
 
-
+* Our Framework
 Stage1:
 
 
