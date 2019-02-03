@@ -81,7 +81,8 @@ We have trained the two model for testing our dataset.
 
 ## Implementation
 
-* Stage1: (Input, Output)\
+* Stage1: 
+(Input is the original images, Output is the bounding box and the cropped patches)
 ```
 cd ./stage1/
 1.run test_net.py as mentioned above
@@ -91,6 +92,7 @@ cd ./stage1/
 
 
 * Stage2: (Input, Output)
+Input is the cropped patches from stage1, Output is the bounding box
 ```
 cd ./stage2/
 1.The input is the patches generated in stage1.
