@@ -103,11 +103,11 @@ cd ./stage2/
 
 * Sample 1:
 
-![Object Detection Sample](samples/Sample1.png)
+![Object Detection Sample](samples/Sample111.png)
 
-* Sample 1:
+* Sample 2:
 
-![Object Detection Sample](samples/Sample11.png)
+![Object Detection Sample](samples/Sample222.png)
 
 * Sample 1:
 
