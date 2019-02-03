@@ -13,7 +13,7 @@ git clone https://github.com/smartprobe/Train_Defect_Detection.git
 
 Then, create a folder:
 ```
-cd Train_Defect_Detection && mkdir data
+cd Train_Defect_Detection/stage1 && mkdir data
 ```
 
 Install all the python dependencies using pip:
