@@ -4,7 +4,7 @@
 
 This is the code for the paper: A Deep Learning based Framework for Component Defect Detection of Moving Trains. We have implemented our methods in **PyTorch**.
 
-![Object Detection Sample](sample/168_det.jpg)
+![Object Detection Sample](samples/frcnn/179_det.jpg)
 
 
 ## Preparation
