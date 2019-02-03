@@ -107,12 +107,12 @@ cd ./stage2/
 
 * Sample 2:
 
-![Object Detection Sample](samples/Sample2.png)
+![Object Detection Sample](samples/Sample3.png)
 
 * Sample 3:
 
-![Object Detection Sample](samples/Sample3.png)
+![Object Detection Sample](samples/Sample4.png)
 
 * Sample 4:
 
-![Object Detection Sample](samples/Sample4.png)
+![Object Detection Sample](samples/Sample2.png)
