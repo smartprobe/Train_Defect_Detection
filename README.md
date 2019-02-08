@@ -113,6 +113,3 @@ cd ./branch2/
 
 ![Object Detection Sample](samples/Sample4.png)
 
-* Sample 4:
-
-![Object Detection Sample](samples/Sample2.png)
