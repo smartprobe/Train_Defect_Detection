@@ -70,7 +70,7 @@ python demo.py --net res101 \
 ```
 Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, EPOCH=20, CHECKPOINT=1000.
 
-## Implementation
+## Trained Model
 
 We have trained the two model for testing our dataset.
 
@@ -82,6 +82,8 @@ Download it and put it into the directory: branch1/models/res101/pascal_voc
 
 Download it and put it into the directory: branch2/models/res101/pascal_voc
 
+
+## Implementation
 
 * Branch 1: 
 (Input is the original images, Output is the bounding box and the cropped patches)
