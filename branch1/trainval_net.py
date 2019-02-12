@@ -1,15 +1,8 @@
-# --------------------------------------------------------
-# Pytorch multi-GPU Faster R-CNN
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Jiasen Lu, Jianwei Yang, based on code from Ross Girshick
-# --------------------------------------------------------
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
 
-import _init_paths
 import os
-import sys
 import numpy as np
 import argparse
 import pprint
@@ -19,9 +12,6 @@ import time
 import torch
 from torch.autograd import Variable
 import torch.nn as nn
-import torch.optim as optim
-
-import torchvision.transforms as transforms
 from torch.utils.data.sampler import Sampler
 
 from roi_data_layer.roidb import combined_roidb
@@ -34,9 +24,6 @@ from model.faster_rcnn.vgg16 import vgg16
 from model.faster_rcnn.resnet import resnet
 
 def parse_args():
-  """
-  Parse input arguments
-  """
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
   parser.add_argument('--dataset', dest='dataset',
                       help='training dataset',
@@ -79,7 +66,6 @@ def parse_args():
                       help='whether perform class_agnostic bbox regression',
                       action='store_true')
 
-# config optimization
   parser.add_argument('--o', dest='optimizer',
                       help='training optimizer',
                       default="sgd", type=str)
@@ -93,12 +79,10 @@ def parse_args():
                       help='learning rate decay ratio',
                       default=0.1, type=float)
 
-# set training session
   parser.add_argument('--s', dest='session',
                       help='training session',
                       default=1, type=int)
 
-# resume trained model
   parser.add_argument('--r', dest='resume',
                       help='resume checkpoint or not',
                       default=False, type=bool)
@@ -111,7 +95,6 @@ def parse_args():
   parser.add_argument('--checkpoint', dest='checkpoint',
                       help='checkpoint to load model',
                       default=0, type=int)
-# log and diaplay
   parser.add_argument('--use_tfb', dest='use_tfboard',
                       help='whether use tensorboard',
                       action='store_true')
@@ -169,8 +152,6 @@ if __name__ == '__main__':
       args.imdbval_name = "imagenet_val"
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '30']
   elif args.dataset == "vg":
-      # train sizes: train, smalltrain, minitrain
-      # train scale: ['150-50-20', '150-50-50', '500-150-80', '750-250-150', '1750-700-450', '1600-400-20']
       args.imdb_name = "vg_150-50-50_minitrain"
       args.imdbval_name = "vg_150-50-50_minival"
       args.set_cfgs = ['ANCHOR_SCALES', '[4, 8, 16, 32]', 'ANCHOR_RATIOS', '[0.5,1,2]', 'MAX_NUM_GT_BOXES', '50']
@@ -186,12 +167,9 @@ if __name__ == '__main__':
   pprint.pprint(cfg)
   np.random.seed(cfg.RNG_SEED)
 
-  #torch.backends.cudnn.benchmark = True
   if torch.cuda.is_available() and not args.cuda:
     print("WARNING: You have a CUDA device, so you should probably run with --cuda")
 
-  # train set
-  # -- Note: Use validation set and disable the flipped to enable faster loading.
   cfg.TRAIN.USE_FLIPPED = True
   cfg.USE_GPU_NMS = args.cuda
   imdb, roidb, ratio_list, ratio_index = combined_roidb(args.imdb_name)
@@ -211,21 +189,17 @@ if __name__ == '__main__':
   dataloader = torch.utils.data.DataLoader(dataset, batch_size=args.batch_size,
                             sampler=sampler_batch, num_workers=args.num_workers)
 
-  # initilize the tensor holder here.
   im_data = torch.FloatTensor(1)
   im_info = torch.FloatTensor(1)
   num_boxes = torch.LongTensor(1)
   gt_boxes = torch.FloatTensor(1)
 
-  # ship to cuda
   if args.cuda:
-    # torch.cuda.set_device(device)
     im_data = im_data.cuda()
     im_info = im_info.cuda()
     num_boxes = num_boxes.cuda()
     gt_boxes = gt_boxes.cuda()
 
-  # make variable
   im_data = Variable(im_data)
   im_info = Variable(im_info)
   num_boxes = Variable(num_boxes)
@@ -234,7 +208,6 @@ if __name__ == '__main__':
   if args.cuda:
     cfg.CUDA = True
 
-  # initilize the network here.
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=True, class_agnostic=args.class_agnostic)
   elif args.net == 'res101':
@@ -252,8 +225,6 @@ if __name__ == '__main__':
 
   lr = cfg.TRAIN.LEARNING_RATE
   lr = args.lr
-  #tr_momentum = cfg.TRAIN.MOMENTUM
-  #tr_momentum = args.momentum
 
   params = []
   for key, value in dict(fasterRCNN.named_parameters()).items():
@@ -298,7 +269,6 @@ if __name__ == '__main__':
     logger = SummaryWriter("logs")
 
   for epoch in range(args.start_epoch, args.max_epochs + 1):
-    # setting to train mode
     fasterRCNN.train()
     loss_temp = 0
     start = time.time()
@@ -325,7 +295,6 @@ if __name__ == '__main__':
            + RCNN_loss_cls.mean() + RCNN_loss_bbox.mean()
       loss_temp += loss.item()
 
-      # backward
       optimizer.zero_grad()
       loss.backward()
       if args.net == "vgg16":
@@ -369,7 +338,6 @@ if __name__ == '__main__':
 
         loss_temp = 0
         start = time.time()
-
     
     save_name = os.path.join(output_dir, 'faster_rcnn_{}_{}_{}.pth'.format(args.session, epoch, step))
     save_checkpoint({

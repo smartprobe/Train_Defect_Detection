@@ -1,8 +1,3 @@
-# --------------------------------------------------------
-# Tensorflow Faster R-CNN
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Jiasen Lu, Jianwei Yang, based on code from Ross Girshick
-# --------------------------------------------------------
 from __future__ import absolute_import
 from __future__ import division
 from __future__ import print_function
@@ -13,13 +8,10 @@ import sys
 import numpy as np
 import argparse
 import pprint
-import pdb
 import time
 import cv2
 import torch
 from torch.autograd import Variable
-import torch.nn as nn
-import torch.optim as optim
 import pickle
 from roi_data_layer.roidb import combined_roidb
 from roi_data_layer.roibatchLoader import roibatchLoader
@@ -34,15 +26,12 @@ from model.faster_rcnn.resnet import resnet
 import pdb
 
 try:
-    xrange          # Python 2
+    xrange
 except NameError:
-    xrange = range  # Python 3
+    xrange = range
 
 
 def parse_args():
-  """
-  Parse input arguments
-  """
   parser = argparse.ArgumentParser(description='Train a Fast R-CNN network')
   parser.add_argument('--dataset', dest='dataset',
                       help='training dataset',
@@ -147,7 +136,6 @@ if __name__ == '__main__':
   load_name = os.path.join(input_dir,
     'faster_rcnn_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
 
-  # initilize the network here.
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=False, class_agnostic=args.class_agnostic)
   elif args.net == 'res101':
@@ -170,20 +158,17 @@ if __name__ == '__main__':
 
 
   print('load model successfully!')
-  # initilize the tensor holder here.
   im_data = torch.FloatTensor(1)
   im_info = torch.FloatTensor(1)
   num_boxes = torch.LongTensor(1)
   gt_boxes = torch.FloatTensor(1)
 
-  # ship to cuda
   if args.cuda:
     im_data = im_data.cuda()
     im_info = im_info.cuda()
     num_boxes = num_boxes.cuda()
     gt_boxes = gt_boxes.cuda()
 
-  # make variable
   im_data = Variable(im_data)
   im_info = Variable(im_info)
   num_boxes = Variable(num_boxes)
@@ -201,9 +186,9 @@ if __name__ == '__main__':
   vis = args.vis
 
   if vis:
-    thresh = 0.0
+    thresh = 0.5
   else:
-    thresh = 0.0
+    thresh = 0.5
 
   save_name = 'faster_rcnn_10'
   num_images = len(imdb.image_index)
@@ -243,10 +228,8 @@ if __name__ == '__main__':
       boxes = rois.data[:, :, 1:5]
 
       if cfg.TEST.BBOX_REG:
-          # Apply bounding-box regression deltas
           box_deltas = bbox_pred.data
           if cfg.TRAIN.BBOX_NORMALIZE_TARGETS_PRECOMPUTED:
-          # Optionally normalize targets by a precomputed mean and stdev
             if args.class_agnostic:
                 box_deltas = box_deltas.view(-1, 4) * torch.FloatTensor(cfg.TRAIN.BBOX_NORMALIZE_STDS).cuda() \
                            + torch.FloatTensor(cfg.TRAIN.BBOX_NORMALIZE_MEANS).cuda()
@@ -259,7 +242,6 @@ if __name__ == '__main__':
           pred_boxes = bbox_transform_inv(boxes, box_deltas, 1)
           pred_boxes = clip_boxes(pred_boxes, im_info.data, 1)
       else:
-          # Simply repeat the boxes, once for each class
           pred_boxes = np.tile(boxes, (1, scores.shape[1]))
 
       pred_boxes /= data[1][0][2].item()
@@ -278,7 +260,6 @@ if __name__ == '__main__':
       for j in xrange(1, imdb.num_classes):
           im_crop = np.copy(im)
           inds = torch.nonzero(scores[:,j]>thresh).view(-1)
-          # if there is det
           if inds.numel() > 0:
             cls_scores = scores[:,j][inds]
             _, order = torch.sort(cls_scores, 0, True)
@@ -288,7 +269,6 @@ if __name__ == '__main__':
               cls_boxes = pred_boxes[inds][:, j * 4:(j + 1) * 4]
             
             cls_dets = torch.cat((cls_boxes, cls_scores.unsqueeze(1)), 1)
-            # cls_dets = torch.cat((cls_boxes, cls_scores), 1)
             cls_dets = cls_dets[order]
             keep = nms(cls_dets, cfg.TEST.NMS)
             cls_dets = cls_dets[keep.view(-1).long()]
@@ -298,7 +278,6 @@ if __name__ == '__main__':
           else:
             all_boxes[j][i] = empty_array
 
-      # Limit to max_per_image detections *over all classes*
       if max_per_image > 0:
           image_scores = np.hstack([all_boxes[j][i][:, -1]
                                     for j in xrange(1, imdb.num_classes)])
@@ -316,10 +295,9 @@ if __name__ == '__main__':
       sys.stdout.flush()
 
       if vis:
-          cv2.imwrite('result.jpg', im2show)
-          #pdb.set_trace()
-          #cv2.imshow('test', im2show)
-          #cv2.waitKey(0)
+          if not os.path.exists('./demo_output'):
+              os.makedirs('./demo_output')
+          cv2.imwrite('./demo_output/{}'.format(imdb.image_path_at(i).split('JPEGImages/')[-1]), im2show)
 
   with open(det_file, 'wb') as f:
       pickle.dump(all_boxes, f, pickle.HIGHEST_PROTOCOL)

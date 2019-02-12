@@ -1,10 +1,3 @@
-# --------------------------------------------------------
-# Fast R-CNN
-# Copyright (c) 2015 Microsoft
-# Licensed under The MIT License [see LICENSE for details]
-# Written by Ross Girshick and Xinlei Chen
-# --------------------------------------------------------
-
 """Compute minibatch blobs for training a Fast R-CNN network."""
 from __future__ import absolute_import
 from __future__ import division
