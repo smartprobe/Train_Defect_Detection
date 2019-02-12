@@ -89,7 +89,7 @@ def vis_detections(im, im_crop_, class_name, dets, thresh=0.5, path='crop', img_
             else:
                 color = (245, 245, 220)  # DarkMagenta
 
-            im_crop = im_crop_[bbox[1]:bbox[3], bbox[0]:bbox[2], :]
+            im_crop = im_crop_[bbox[1]-50:bbox[3]+50, bbox[0]-50:bbox[2]+50, :]
             results.append([img_name, class_name, score, bbox[0], bbox[1], bbox[2], bbox[3]])
             if not os.path.exists(path):
                 os.makedirs(path)
