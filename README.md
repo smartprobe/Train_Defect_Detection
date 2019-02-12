@@ -51,7 +51,7 @@ CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_net.py \
 
 ## Test
 
-If you want to evlauate the detection performance , simply run
+If you want to evlauate the detection performance and generate bounding boxes in images and patches, simply run
 ```
 python test_net.py --dataset pascal_voc --net res101 \
                    --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
@@ -61,6 +61,7 @@ Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, 
 
 ## Demo
 
+If you want to generate bounding boxes in images only, simply run
 ```
 python demo.py --net res101 \
                --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
@@ -86,7 +87,7 @@ Download it and put it into the directory: branch2/models/res101/pascal_voc
 ```
 cd ./branch1
 1.Run test_net.py as mentioned above. The input directory is: ./branch1/data
-2.Generate bounding boxes in Images and saved in: ./branch1/demo_output
+2.Generate bounding boxes in images and saved in: ./branch1/demo_output
 3.Generate patches and saved in: ./branch1/crop_images
 ```
 
@@ -95,7 +96,7 @@ cd ./branch1
 ```
 cd ./branch2
 1.Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
-2.Generate bounding boxes in Images and saved in: ./branch2/demo_output
+2.Generate bounding boxes in images and saved in: ./branch2/demo_output
 ```
 
 
