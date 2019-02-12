@@ -13,6 +13,7 @@ git clone https://github.com/smartprobe/Train_Defect_Detection.git
 
 Install all the python dependencies using pip:
 ```
+cd ./branch1
 pip install -r requirements.txt
 ```
 
