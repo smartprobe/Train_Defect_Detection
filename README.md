@@ -11,11 +11,6 @@ First of all, clone the code
 git clone https://github.com/smartprobe/Train_Defect_Detection.git
 ```
 
-Then, create a folder:
-```
-cd Train_Defect_Detection/branch1 && mkdir data
-```
-
 Install all the python dependencies using pip:
 ```
 pip install -r requirements.txt
@@ -35,11 +30,11 @@ sh make.sh
 
 ## Pretrained Model
 
-We used two pretrained models in our experiments, VGG and ResNet101. You can download these pre-trained models from:
+We used the pretrained models in our experiments. You can download these pre-trained models from:
 
 * ResNet101: [Google Drive](https://drive.google.com/open?id=1v6oxLMeUWM1HYh6ThhNkmvq1nAZNoUPK)
 
-Download them and put them into the data/pretrained_model/.
+Download it and put it into the directory: branch1/data/pretrained_model/ and branch2/data/pretrained_model
 
 ## Train
 
@@ -68,8 +63,11 @@ We have trained the two model for testing our dataset.
 
 * Branch 1:  [Google Drive](https://drive.google.com/open?id=151499FF5oN8jHKclp693tHIonic5JuV7)
 
+Download it and put it into the directory: branch1/models/res101/pascal_voc
+
 * Branch 2:  [Google Drive](https://drive.google.com/open?id=1b2VuFeIjO8klsvdHJ_DUJzq-Hcimkrls)
 
+Download it and put it into the directory: branch2/models/res101/pascal_voc
 
 
 ## Implementation
@@ -77,25 +75,22 @@ We have trained the two model for testing our dataset.
 * Branch 1: 
 (Input is the original images, Output is the bounding box and the cropped patches)
 ```
-cd ./branch1/
-1.run test_net.py as mentioned above
-2.generate bounding boxes in Images and saved in ./results
-3.generate patches in ./crop_images
+cd ./branch1
+1.Run test_net.py as mentioned above, the input directory is ./branch1/data
+2.Generate bounding boxes in Images and saved in ./branch1/demo_output
+3.Generate patches and saved in ./branch1/crop_images
 ```
-
 
 *  Branch 2: 
 (Input is the cropped patches from Branch 1, Output is the bounding box)
 ```
-cd ./branch2/
-1.The input is the patches generated in Branch 1.
-2.run demo.py as mentioned above
-3.generate bounding boxes in Images and saved in ./demo
+cd ./branch2
+1.Run demo.py as mentioned above. The input derectory is ./branch1/crop_images
+2.Generate bounding boxes in Images and saved in ./branch2/demo_output
 ```
 
 
-
-## Sample of our method
+## Samples of our method
 
 * Sample 1:
 
