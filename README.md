@@ -124,6 +124,6 @@ cd ./branch2
 (c) bearing eroded;
 (d) bolt missing.
 
-![Object Detection Sample](samples/Example of Train Components Defects.png)
+![Object Detection Sample](samples/Defects.png)
 
 ![Object Detection Sample](samples/Sample3.png)
