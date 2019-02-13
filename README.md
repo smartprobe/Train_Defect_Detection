@@ -126,4 +126,4 @@ cd ./branch2
 
 ![Object Detection Sample](samples/Example of Train Components Defects.png)
 
-
+![Object Detection Sample](samples/Sample3.png)
