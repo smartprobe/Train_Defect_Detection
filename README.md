@@ -119,6 +119,11 @@ cd ./branch2
 
 ## Examples of train component defects
 
+(a) locking plate loosen;
+(b) valve closed;
+(c) bearing eroded;
+(d) bolt missing.
+
 ![Component Defects Example](samples/Example of Train Components Defects.png)
 
 
