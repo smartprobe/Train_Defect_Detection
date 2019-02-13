@@ -119,4 +119,4 @@ cd ./branch2
 
 ## Examples of train component defects
 
-![Component Defects Example](samples/Examples of Train Component Defects.png)
+![Component Defects Example](samples/Example of Train Components Defects.jpg)
