@@ -103,7 +103,7 @@ cd ./branch2
 ```
 
 
-## Samples of our method
+## Samples of our method about object detection
 
 * Sample 1:
 
@@ -117,3 +117,6 @@ cd ./branch2
 
 ![Object Detection Sample](samples/Sample3.png)
 
+## Examples of train component defects
+
+![Component Defects Example](samples/Examples of Train Component Defects.png)
