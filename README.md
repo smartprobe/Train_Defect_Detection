@@ -2,7 +2,9 @@
 
 ## Introduction
 
-This is the code for the paper: A Deep Learning based Framework for Component Defect Detection of Moving Trains. We have implemented our methods in **PyTorch**.
+This is the code for the paper: **A Deep Learning based Framework for Component Defect Detection of Moving Trains**.
+
+We have implemented our methods in PyTorch. Large part code is reference from  [jwyang/faster-rcnn.pytorch](https://github.com/jwyang/faster-rcnn.pytorch)
 
 ## Preparation
 
