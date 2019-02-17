@@ -121,7 +121,7 @@ cd ./branch2
 
 ## Examples of train component defects
 
-# List of defects types
+### List of defects types
 * (a) Locking plate loosen;
 * (b) Valve closed;
 * (c) Bearing eroded;
@@ -129,7 +129,7 @@ cd ./branch2
 
 ![Examples of train component defects](samples/Component_Defects/Sample1.png)
 
-# Comparison of defects and normal situation
+### Comparison of defects and normal situation
 
 As shown below, the red box refers to the defects and the blue box refers to the normal situation.
 
