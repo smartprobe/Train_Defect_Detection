@@ -109,15 +109,15 @@ cd ./branch2
 
 * Sample 1:
 
-![Object Detection Sample](samples/Sample1.png)
+![Object Detection Sample](samples/Object_Detection/Sample1.png)
 
 * Sample 2:
 
-![Object Detection Sample](samples/Sample2.png)
+![Object Detection Sample](samples/Object_Detection/Sample2.png)
 
 * Sample 3:
 
-![Object Detection Sample](samples/Sample3.png)
+![Object Detection Sample](samples/Object_Detection/Sample3.png)
 
 ## Examples of train component defects
 
@@ -126,4 +126,10 @@ cd ./branch2
 * (c) Bearing eroded;
 * (d) Bolt missing.
 
-![Examples of train component defects](samples/Defects.png)
+![Examples of train component defects](samples/Component_Defects/Sample1.png)
+
+![Examples of train component defects](samples/Component_Defects/Sample2.png)
+
+![Examples of train component defects](samples/Component_Defects/Sample3.png)
+
+![Examples of train component defects](samples/Component_Defects/Sample4.png)
