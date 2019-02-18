@@ -88,33 +88,39 @@ Download it and put it into the directory: branch2/models/res101/pascal_voc
 
 ## Implementation
 
-* Branch 1: 
-(Input is the original images, Output is the bounding box and the cropped patches)
+* Branch 1: (Input is the original images, Output is the bounding box and the cropped patches)
 
 ```
 cd ./branch1
 ```
 
-1.Run test_net.py as mentioned above. The input directory is: ./branch1/data
+1. Run test_net.py as mentioned above. The input directory is: ./branch1/data
 
 ```
 python test_HOD.py --dataset pascal_voc --net res101 \
                    --checksession 1 --checkepoch 20 --checkpoint 1687 \
                    --cuda --vis
 ```
-2.Generate bounding boxes in images and saved in: ./branch1/demo_output
 
-3.Generate patches and saved in: ./branch1/crop_images
+2. Generate bounding boxes in images and saved in: ./branch1/demo_output
 
-*  Branch 2: 
-(Input is the cropped patches from Branch 1, Output is the bounding box)
+3. Generate patches and saved in: ./branch1/crop_images
+
+*  Branch 2: (Input is the cropped patches from Branch 1, Output is the bounding box)
 
 ```
 cd ./branch2
-1.Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
-2.Generate bounding boxes in images and saved in: ./branch2/demo_output
 ```
 
+1.Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
+
+```
+python demo_HOD.py --net res101 \
+               --checksession 1 --checkepoch 20 --checkpoint 3287 \
+               --cuda
+```
+
+2.Generate bounding boxes in images and saved in: ./branch2/demo_output
 
 ## Samples of our method about object detection
 
