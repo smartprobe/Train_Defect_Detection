@@ -40,7 +40,6 @@ def weights_normal_init(model, dev=0.01):
 
 
 def clip_gradient(model, clip_norm):
-    """Computes a gradient clipping coefficient based on gradient norm."""
     totalnorm = 0
     for p in model.parameters():
         if p.requires_grad:
@@ -55,25 +54,12 @@ def clip_gradient(model, clip_norm):
 
 # def vis_detections(im, im_crop_, class_name, dets, thresh=0.5, path='crop', img_name='1', results = []):
 def vis_detections(im, class_name, dets, thresh=0.5):
-    """Visual debugging of detections."""
-
-    # dict = {'HolderA': 'Holder', 'WheelA': 'WheelA', 'WheelB': 'WheelB', 'BrakeA': 'Brake', 'SpringA': 'Spring',
-    #         'BuckleA': 'BuckleA', 'BuckleB': 'BuckleB', 'TubeA': 'Tube', 'NutA': 'NutA', 'ScrewA': 'ScrewA',
-    #         'NutB': 'NutB', 'ScrewB': 'ScrewB',
-    #         'WireA': 'Wire', 'PlateA': 'PlateA', 'PlateB': 'PlateB', 'PlateD': 'PlateC', 'PlateE': 'PlateD',
-    #         'BoltA': 'Bolt', 'LoopB': 'Loop', 'JointA': 'JointA', 'JointB': 'JointB', 'FixatorA': 'Fixator',
-    #         'BearingA': 'Bearing', 'PlugA': 'Plug'}
-
-    # dict = {'handle_bad', 'handle_good'}
-
     k = 0
     for i in range(np.minimum(10, dets.shape[0])):
         bbox = tuple(int(np.round(x)) for x in dets[i, :4])
         score = dets[i, -1]
         if score > thresh:
             k = k + 1
-            # Color site: http://www.wahart.com.hk/rgb.htm
-            # R B G ->  B G R
             if class_name == 'b_plate':
                 color = (15, 185, 255)  # DarkGoldenrod1
             elif class_name == 'l_plate':
@@ -102,56 +88,22 @@ def vis_detections(im, class_name, dets, thresh=0.5):
                 color = (48, 48, 255)  # Firebrick1
             elif class_name == 'plug':
                 color = (0, 255, 255)  # Yellow
-            # elif class_name == 'NutB':
-            #     color = (255, 144, 30)  # DodgerBlue
-            # elif class_name == 'NutC':
-            #     color = (180, 238, 180)  # DarkSeaGreen2
-            # elif class_name == 'WireA':
-            #     color = (255, 255, 255)  # White
-            # elif class_name == 'PlateA':
-            #     color = (0, 69, 255)  # OrangeRed
-            # elif class_name == 'PlateB':
-            #     color = (102, 205, 0)  # SpringGreen3
-            # elif class_name == 'PlateD':
-            #     color = (0, 255, 0)  # Green
-            # elif class_name == 'PlateE':
-            #     color = (0, 140, 250)  # DarkOrange
-            # elif class_name == 'BoltA':
-            #     color = (255, 255, 0)  # Cyan
-            # elif class_name == 'LoopB':
-            #     color = (180, 105, 255)  # HotPink
-            # elif class_name == 'JointA':
-            #     color = (105, 140, 255)  # Salmon1
-            # elif class_name == 'JointB':
-            #     color = (255, 0, 255)  # Magenta3
-            # elif class_name == 'FixatorA':
-            #     color = (0, 205, 102)  # Chartreuse3
-            # elif class_name == 'BearingA':
-            #     color = (185, 218, 255)  # PeachPuff
-            # elif class_name == 'PlugA':
-            #     color = (193, 193, 255)  # RosyBrown1
             else:
                 color = (245, 245, 220)  # DarkMagenta
-            #cv2.rectangle(im, bbox[0:2], bbox[2:4], color, 2)
-            #im_crop = im.copy()
-            #im_crop = im_crop[bbox[0]:bbox[2], bbox[1]:bbox[3], :]
 
-            # im_crop = im_crop_[bbox[1]:bbox[3], bbox[0]:bbox[2], :]
+            # im_crop = im_crop_[bbox[1]-50:bbox[3]+50, bbox[0]-50:bbox[2]+50, :]
             # results.append([img_name, class_name, score, bbox[0], bbox[1], bbox[2], bbox[3]])
             # if not os.path.exists(path):
             #     os.makedirs(path)
             # cv2.imwrite(os.path.join(path,"{}_{}_{}.jpg".format(img_name,class_name,k)), im_crop)
 
             cv2.rectangle(im, bbox[0:2], bbox[2:4], color, 2)
-            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0] + 5, bbox[1] + 15), cv2.FONT_HERSHEY_COMPLEX,
-                        0.6, color, thickness=2)
-            # cv2.putText(im, '%s: %.3f' % (dict[class_name], score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_COMPLEX,
-            #             0.5, color, thickness=1)
+            cv2.putText(im, '%s: %.3f' % (class_name, score), (bbox[0], bbox[1] + 15), cv2.FONT_HERSHEY_COMPLEX,
+                        0.5, color, thickness=1)
     return im#, results
 
 
 def adjust_learning_rate(optimizer, decay=0.1):
-    """Sets the learning rate to the initial LR decayed by 0.5 every 20 epochs"""
     for param_group in optimizer.param_groups:
         param_group['lr'] = decay * param_group['lr']
 
@@ -177,20 +129,6 @@ def _smooth_l1_loss(bbox_pred, bbox_targets, bbox_inside_weights, bbox_outside_w
 
 
 def _crop_pool_layer(bottom, rois, max_pool=True):
-    # code modified from
-    # https://github.com/ruotianluo/pytorch-faster-rcnn
-    # implement it using stn
-    # box to affine
-    # input (x1,y1,x2,y2)
-    """
-    [  x2-x1             x1 + x2 - W + 1  ]
-    [  -----      0      ---------------  ]
-    [  W - 1                  W - 1       ]
-    [                                     ]
-    [           y2-y1    y1 + y2 - H + 1  ]
-    [    0      -----    ---------------  ]
-    [           H - 1         H - 1      ]
-    """
     rois = rois.detach()
     batch_size = bottom.size(0)
     D = bottom.size(1)
@@ -205,7 +143,6 @@ def _crop_pool_layer(bottom, rois, max_pool=True):
     height = bottom.size(2)
     width = bottom.size(3)
 
-    # affine theta
     zero = Variable(rois.data.new(rois.size(0), 1).zero_())
     theta = torch.cat([ \
         (x2 - x1) / (width - 1),
@@ -267,14 +204,6 @@ def _affine_theta(rois, input_size):
 
     zero = Variable(rois.data.new(rois.size(0), 1).zero_())
 
-    # theta = torch.cat([\
-    #   (x2 - x1) / (width - 1),
-    #   zero,
-    #   (x1 + x2 - width + 1) / (width - 1),
-    #   zero,
-    #   (y2 - y1) / (height - 1),
-    #   (y1 + y2 - height + 1) / (height - 1)], 1).view(-1, 2, 3)
-
     theta = torch.cat([ \
         (y2 - y1) / (height - 1),
         zero,
@@ -287,11 +216,10 @@ def _affine_theta(rois, input_size):
 
 
 def compare_grid_sample():
-    # do gradcheck
     N = random.randint(1, 8)
-    C = 2  # random.randint(1, 8)
-    H = 5  # random.randint(1, 8)
-    W = 4  # random.randint(1, 8)
+    C = 2
+    H = 5
+    W = 4
     input = Variable(torch.randn(N, C, H, W).cuda(), requires_grad=True)
     input_p = input.clone().data.contiguous()
 

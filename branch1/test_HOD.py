@@ -134,7 +134,7 @@ if __name__ == '__main__':
   if not os.path.exists(input_dir):
     raise Exception('There is no input directory for loading network from ' + input_dir)
   load_name = os.path.join(input_dir,
-    'faster_rcnn_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
+    'HOD_branch1_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
 
   if args.net == 'vgg16':
     fasterRCNN = vgg16(imdb.classes, pretrained=False, class_agnostic=args.class_agnostic)
@@ -190,7 +190,7 @@ if __name__ == '__main__':
   else:
     thresh = 0.5
 
-  save_name = 'faster_rcnn_10'
+  save_name = 'HOD_branch1_test'
   num_images = len(imdb.image_index)
   all_boxes = [[[] for _ in xrange(num_images)]
                for _ in xrange(imdb.num_classes)]

@@ -28,7 +28,7 @@ class pascal_voc(imdb):
         self._devkit_path = self._get_default_path() if devkit_path is None \
             else devkit_path
         self._data_path = './data'
-        self._classes = ('__background__',  # always index 0
+        self._classes = ('__background__',
                          'b_plate', 'l_plate', 'bearing', 'dust_collector',
                          'flange', 'spring', 'group', 'fixator')
         self._class_to_ind = dict(zip(self.classes, xrange(self.num_classes)))

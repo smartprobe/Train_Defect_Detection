@@ -8,19 +8,26 @@ import sys
 import numpy as np
 import argparse
 import pprint
+import pdb
 import time
 import cv2
 import torch
 from torch.autograd import Variable
+import torch.nn as nn
+import torch.optim as optim
+
+import torchvision.transforms as transforms
+import torchvision.datasets as dset
 from scipy.misc import imread
+from roi_data_layer.roidb import combined_roidb
+from roi_data_layer.roibatchLoader import roibatchLoader
 from model.utils.config import cfg, cfg_from_file, cfg_from_list, get_output_dir
 from model.rpn.bbox_transform import clip_boxes
 from model.nms.nms_wrapper import nms
 from model.rpn.bbox_transform import bbox_transform_inv
 from model.utils.net_utils import save_net, load_net, vis_detections
 from model.utils.blob import im_list_to_blob
-from model.faster_rcnn.vgg16 import vgg16
-from model.faster_rcnn.resnet import resnet
+from model.fpn.resnet import resnet
 import pdb
 
 try:
@@ -48,7 +55,7 @@ def parse_args():
                       default="./models")
   parser.add_argument('--image_dir', dest='image_dir',
                       help='directory to load images for demo',
-                      default="images")
+                      default="../branch1/crop_image")
   parser.add_argument('--cuda', dest='cuda',
                       help='whether use CUDA',
                       action='store_true')
@@ -100,7 +107,6 @@ def _get_image_blob(im):
 
   for target_size in cfg.TEST.SCALES:
     im_scale = float(target_size) / float(im_size_min)
-    # Prevent the biggest axis from being more than MAX_SIZE
     if np.round(im_scale * im_size_max) > cfg.TEST.MAX_SIZE:
       im_scale = float(cfg.TEST.MAX_SIZE) / float(im_size_max)
     im = cv2.resize(im_orig, None, None, fx=im_scale, fy=im_scale,
@@ -129,18 +135,15 @@ if __name__ == '__main__':
   print('Using config:')
   pprint.pprint(cfg)
   np.random.seed(cfg.RNG_SEED)
-  input_dir ='./data/JPEGImages'
+  input_dir = args.load_dir + "/" + args.net + "/" + args.dataset
   if not os.path.exists(input_dir):
     raise Exception('There is no input directory for loading network from ' + input_dir)
   load_name = os.path.join(input_dir,
-    'faster_rcnn_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
+    'HOD_branch2_{}_{}_{}.pth'.format(args.checksession, args.checkepoch, args.checkpoint))
 
   pascal_classes = np.asarray(['__background__',
-                       'aeroplane', 'bicycle', 'bird', 'boat',
-                       'bottle', 'bus', 'car', 'cat', 'chair',
-                       'cow', 'diningtable', 'dog', 'horse',
-                       'motorbike', 'person', 'pottedplant',
-                       'sheep', 'sofa', 'train', 'tvmonitor'])
+                               'nut_s', 'screw_s', 'nut_f', 'screw_f',
+                               'bolt', 'plug'])
 
   if args.net == 'vgg16':
     fasterRCNN = vgg16(pascal_classes, pretrained=False, class_agnostic=args.class_agnostic)
@@ -196,7 +199,7 @@ if __name__ == '__main__':
 
   start = time.time()
   max_per_image = 100
-  thresh = 0.05
+  thresh = 0.5
   vis = True
 
   webcam_num = args.webcam_num
@@ -204,11 +207,11 @@ if __name__ == '__main__':
     cap = cv2.VideoCapture(webcam_num)
     num_images = 0
   else:
-    print(args.image_dir)
     imglist = os.listdir(args.image_dir)
     num_images = len(imglist)
 
   print('Loaded Photo: {} images.'.format(num_images))
+
 
   while (num_images >= 0):
       total_tic = time.time()
@@ -221,9 +224,7 @@ if __name__ == '__main__':
         ret, frame = cap.read()
         im_in = np.array(frame)
       else:
-        print(args.image_dir)
         im_file = os.path.join(args.image_dir, imglist[num_images])
-        print (im_file)
         im_in = np.array(imread(im_file))
       if len(im_in.shape) == 2:
         im_in = im_in[:,:,np.newaxis]
@@ -243,7 +244,6 @@ if __name__ == '__main__':
       im_info.data.resize_(im_info_pt.size()).copy_(im_info_pt)
       gt_boxes.data.resize_(1, 1, 5).zero_()
       num_boxes.data.resize_(1).zero_()
-
       det_tic = time.time()
 
       rois, cls_prob, bbox_pred, \
@@ -313,9 +313,10 @@ if __name__ == '__main__':
           sys.stdout.write('im_detect: {:d}/{:d} {:.3f}s {:.3f}s   \r' \
                            .format(num_images + 1, len(imglist), detect_time, nms_time))
           sys.stdout.flush()
-
       if vis and webcam_num == -1:
-          result_path = os.path.join(args.image_dir, imglist[num_images][:-4] + "_det.jpg")
+          if not os.path.exists('./demo_output'):
+              os.makedirs('./demo_output')
+          result_path = os.path.join('./demo_output',imglist[num_images])
           cv2.imwrite(result_path, im2show)
       else:
           im2showRGB = cv2.cvtColor(im2show, cv2.COLOR_BGR2RGB)

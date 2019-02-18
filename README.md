@@ -24,7 +24,6 @@ Compile the cuda dependencies using following simple commands:
 cd lib
 sh make.sh
 ```
-If there is any problem, you should try to modify the parameter "CUDA_ARCH" in the file "make.sh" to suit your environment.
 
 ## Prerequisites
 
@@ -46,18 +45,18 @@ Before training, set the right directory to save and load the trained models. Ch
 
 To train a faster R-CNN model with resnet101 on pascal_voc, simply run:
 ```
-CUDA_VISIBLE_DEVICES=$GPU_ID 
-python trainval_HOD.py --dataset pascal_voc --net res101 \
-                       --bs $BATCH_SIZE --nw $WORKER_NUMBER \
-                       --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \
-                       --cuda
+CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_net.py \
+                   --dataset pascal_voc --net res101 \
+                   --bs $BATCH_SIZE --nw $WORKER_NUMBER \
+                   --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \
+                   --cuda
 ```
 
 ## Test
 
 If you want to evlauate the detection performance and generate bounding boxes in images and patches, simply run
 ```
-python test_HOD.py --dataset pascal_voc --net res101 \
+python test_net.py --dataset pascal_voc --net res101 \
                    --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
                    --cuda --vis
 ```
@@ -67,9 +66,9 @@ Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, 
 
 If you want to generate bounding boxes in images only, simply run
 ```
-python demo_HOD.py --net res101 \
-                   --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
-                   --cuda
+python demo.py --net res101 \
+               --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
+               --cuda
 ```
 Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, EPOCH=20, CHECKPOINT=1000.
 
@@ -88,70 +87,43 @@ Download it and put it into the directory: branch2/models/res101/pascal_voc
 
 ## Implementation
 
-* Branch 1: (Input is the original images, Output is the bounding box and the cropped patches)
-
+* Branch 1: 
+(Input is the original images, Output is the bounding box and the cropped patches)
 ```
 cd ./branch1
+1.Run test_net.py as mentioned above. The input directory is: ./branch1/data
+2.Generate bounding boxes in images and saved in: ./branch1/demo_output
+3.Generate patches and saved in: ./branch1/crop_images
 ```
 
-1. Run test_net.py as mentioned above. The input directory is: ./branch1/data
-
-```
-python test_HOD.py --dataset pascal_voc --net res101 \
-                   --checksession 1 --checkepoch 20 --checkpoint 1687 \
-                   --cuda --vis
-```
-
-2. Generate bounding boxes in images and saved in: ./branch1/demo_output
-
-3. Generate patches and saved in: ./branch1/crop_images
-
-*  Branch 2: (Input is the cropped patches from Branch 1, Output is the bounding box)
-
+*  Branch 2: 
+(Input is the cropped patches from Branch 1, Output is the bounding box)
 ```
 cd ./branch2
+1.Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
+2.Generate bounding boxes in images and saved in: ./branch2/demo_output
 ```
 
-1. Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
-
-```
-python demo_HOD.py --net res101 \
-                   --checksession 1 --checkepoch 20 --checkpoint 3287 \
-                   --cuda
-```
-
-2. Generate bounding boxes in images and saved in: ./branch2/demo_output
 
 ## Samples of our method about object detection
 
 * Sample 1:
 
-![Object Detection Sample](samples/Object_Detection/Sample1.png)
+![Object Detection Sample](samples/Sample1.png)
 
 * Sample 2:
 
-![Object Detection Sample](samples/Object_Detection/Sample2.png)
+![Object Detection Sample](samples/Sample2.png)
 
 * Sample 3:
 
-![Object Detection Sample](samples/Object_Detection/Sample3.png)
+![Object Detection Sample](samples/Sample3.png)
 
 ## Examples of train component defects
 
-### List of defects types
 * (a) Locking plate loosen;
 * (b) Valve closed;
 * (c) Bearing eroded;
 * (d) Bolt missing.
 
-![Examples of train component defects](samples/Component_Defects/Sample1.png)
-
-### Comparison of defects and normal situation
-
-As shown below, the red box refers to the defects and the blue box refers to the normal situation.
-
-![Examples of train component defects](samples/Component_Defects/Sample2.png)
-
-![Examples of train component defects](samples/Component_Defects/Sample3.png)
-
-![Examples of train component defects](samples/Component_Defects/Sample4.png)
+![Examples of train component defects](samples/Defects.png)
