@@ -24,6 +24,7 @@ Compile the cuda dependencies using following simple commands:
 cd lib
 sh make.sh
 ```
+If there is any problem, you should try to modify the parameter "CUDA_ARCH" in the file "make.sh".
 
 ## Prerequisites
 
