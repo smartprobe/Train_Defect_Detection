@@ -103,6 +103,7 @@ python test_HOD.py --dataset pascal_voc --net res101 \
                    --cuda --vis
 ```
 2.Generate bounding boxes in images and saved in: ./branch1/demo_output
+
 3.Generate patches and saved in: ./branch1/crop_images
 
 *  Branch 2: 
