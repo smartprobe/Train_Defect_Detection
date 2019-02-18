@@ -108,7 +108,7 @@ python test_HOD.py --dataset pascal_voc --net res101 \
 
 2. Generate bounding boxes in images and saved in: ./branch1/demo_output
 
-3. Generate patches and saved in: ./branch1/crop_images
+3. Generate patches and saved in: ./branch1/crop_image
 
 *  Branch 2: (Input is the cropped patches from Branch 1, Output is the bounding box)
 
@@ -116,7 +116,7 @@ python test_HOD.py --dataset pascal_voc --net res101 \
 cd ./branch2
 ```
 
-1. Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
+1. Run demo.py as mentioned above. The input directory is: ./branch1/crop_image
 
 ```
 python demo_HOD.py --net res101 \
