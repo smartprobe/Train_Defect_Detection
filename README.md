@@ -46,11 +46,11 @@ Before training, set the right directory to save and load the trained models. Ch
 
 To train a faster R-CNN model with resnet101 on pascal_voc, simply run:
 ```
-CUDA_VISIBLE_DEVICES=$GPU_ID python trainval_HOD.py \
-                   --dataset pascal_voc --net res101 \
-                   --bs $BATCH_SIZE --nw $WORKER_NUMBER \
-                   --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \
-                   --cuda
+CUDA_VISIBLE_DEVICES=$GPU_ID 
+python trainval_HOD.py --dataset pascal_voc --net res101 \
+                       --bs $BATCH_SIZE --nw $WORKER_NUMBER \
+                       --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \
+                       --cuda
 ```
 
 ## Test
@@ -68,8 +68,8 @@ Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, 
 If you want to generate bounding boxes in images only, simply run
 ```
 python demo_HOD.py --net res101 \
-               --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
-               --cuda
+                   --checksession $SESSION --checkepoch $EPOCH --checkpoint $CHECKPOINT \
+                   --cuda
 ```
 Specify the specific model session, chechepoch and checkpoint, e.g., SESSION=1, EPOCH=20, CHECKPOINT=1000.
 
@@ -112,15 +112,15 @@ python test_HOD.py --dataset pascal_voc --net res101 \
 cd ./branch2
 ```
 
-1.Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
+1. Run demo.py as mentioned above. The input directory is: ./branch1/crop_images
 
 ```
 python demo_HOD.py --net res101 \
-               --checksession 1 --checkepoch 20 --checkpoint 3287 \
-               --cuda
+                   --checksession 1 --checkepoch 20 --checkpoint 3287 \
+                   --cuda
 ```
 
-2.Generate bounding boxes in images and saved in: ./branch2/demo_output
+2. Generate bounding boxes in images and saved in: ./branch2/demo_output
 
 ## Samples of our method about object detection
 
