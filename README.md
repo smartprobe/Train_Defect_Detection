@@ -50,7 +50,7 @@ Before training, set the right directory to save and load the trained models. Ch
 
 To train a faster R-CNN model with resnet101 on pascal_voc, simply run:
 ```
-CUDA_VISIBLE_DEVICES=$GPU_ID 
+export CUDA_VISIBLE_DEVICES=$GPU_ID 
 python trainval_HOD.py --dataset pascal_voc --net res101 \
                        --bs $BATCH_SIZE --nw $WORKER_NUMBER \
                        --lr $LEARNING_RATE --lr_decay_step $DECAY_STEP \
