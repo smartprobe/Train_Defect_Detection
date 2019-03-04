@@ -1,0 +1,26 @@
+<annotation>
+	<folder>test3</folder>
+	<filename>sample3_l_plate_1.jpg</filename>
+	<path>C:\Users\I-For\Desktop\test3\sample3_l_plate_1.jpg</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>262</width>
+		<height>302</height>
+		<depth>1</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>Bolt</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>102</xmin>
+			<ymin>117</ymin>
+			<xmax>150</xmax>
+			<ymax>187</ymax>
+		</bndbox>
+	</object>
+</annotation>

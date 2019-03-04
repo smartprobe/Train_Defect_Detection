@@ -1,0 +1,8 @@
+sample1_dust_collector_1
+sample1_flange_1
+sample2_bearing_1
+sample2_group_1
+sample3_l_plate_1
+sample3_l_plate_2
+sample4_b_plate_1
+sample4_fixator_1
